@@ -46,6 +46,10 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
+dev:
+	pip install -r dev-requirements.txt
+	pip install -e .
+
 lint: ## check style with flake8
 	flake8 healthchecks_manager tests
 
