@@ -10,15 +10,15 @@ workflows:
             branches:
               ignore:
                 - master
-      - test-python-install:
+      - test-python:
           version: "3.6"
           requires:
             - build
-      - test-python-install:
+      - test-python:
           version: "3.7"
           requires:
             - build
-      - test-python-install:
+      - test-python:
           version: "3.8"
           requires:
             - build
@@ -28,15 +28,15 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test-python-install:
+      - test-python:
           version: "3.6"
           requires:
             - build
-      - test-python-install:
+      - test-python:
           version: "3.7"
           requires:
             - build
-      - test-python-install:
+      - test-python:
           version: "3.8"
           requires:
             - build
@@ -78,7 +78,7 @@ jobs:
             codecov
       - store_artifacts:
           path: htmlcov/
-  test-python-install:
+  test-python:
     parameters:
       version:
         type: string
@@ -107,11 +107,6 @@ jobs:
             codecov
       - store_artifacts:
           path: htmlcov/
-      - run:
-          name: Smoke Test Install 
-          command: |
-            python --version
-            sudo pip3 install healthchecks_manager
   integration:
     docker:
       - image: circleci/python:3.6
