@@ -42,7 +42,7 @@ workflows:
             - build
       - deploy:
           requires:
-            - build
+            - test-python
           filters:
             tags:
               only: /[0-9]+(\.[0-9]+)*/
