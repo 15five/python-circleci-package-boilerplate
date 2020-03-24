@@ -13,12 +13,6 @@ from setuptools.command.install import install
 VERSION = "0.0.2"
 
 
-def readme():
-    """print long description"""
-    with open("README.md") as f:
-        return f.read()
-
-
 class VerifyVersionCommand(install):
     """Custom command to verify that the git tag matches our version"""
 
@@ -38,7 +32,7 @@ setup(
     name="healthchecks_manager",
     version=VERSION,
     description="Library for automatic registration and pinging of https://healthchecks.io/ healthchecks.",
-    long_description=readme(),
+    long_description="see repo for readme",
     url="https://github.com/15five/healthchecks-manager",
     author="Caleb Sparks",
     author_email="caleb@15five.com",
