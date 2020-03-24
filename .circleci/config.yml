@@ -111,7 +111,7 @@ jobs:
           name: Smoke Test Install 
           command: |
             python --version
-            sudo pip3 install circleci
+            sudo pip3 install healthchecks_manager
   integration:
     docker:
       - image: circleci/python:3.6
