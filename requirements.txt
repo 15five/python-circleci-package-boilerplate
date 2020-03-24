@@ -1,2 +1,1 @@
 requests==2.20.1
-pytest==4.1.1
