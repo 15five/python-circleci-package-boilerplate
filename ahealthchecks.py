@@ -113,6 +113,26 @@ def start(check_name: str, creation_params: dict):
         pass
 
 
+def done(check_name: str, creation_params: dict):
+    endpoint = get_endpoint(check_name, creation_params)
+    try:
+        requests.get(endpoint, timeout=5)
+    except requests.exceptions.RequestException:
+        # If the network request fails for any reason, we don't want
+        # it to prevent the main job from running
+        pass
+
+
+def fail(check_name: str, creation_params: dict):
+    endpoint = get_endpoint(check_name, creation_params)
+    try:
+        requests.get(endpoint + "/fail", timeout=5)
+    except requests.exceptions.RequestException:
+        # If the network request fails for any reason, we don't want
+        # it to prevent the main job from running
+        pass
+
+
 """
 ### management command
 ping(name + '/' + flag)
