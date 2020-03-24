@@ -104,18 +104,8 @@ def get_endpoint(check_name: str, creation_params: dict = {}):
 
 
 def start(check_name: str, creation_params: dict):
-    """
-    Fail-safe - will not fail if network error. 
-    Returns error if present
-    """
     endpoint = get_endpoint(check_name, creation_params)
-    try:
-        requests.get(endpoint + "/start", timeout=5)
-    except requests.exceptions.RequestException as e:
-        # If the network request fails for any reason, we don't want
-        # it to prevent the main job from running
-        return e
-    return None
+    requests.get(endpoint + "/start", timeout=5)
 
 
 def done(check_name: str, creation_params: dict):
