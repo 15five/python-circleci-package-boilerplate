@@ -4,7 +4,7 @@ from typing import List
 import requests
 
 API_URL_BASE = "https://healthchecks.io/api/v1/"
-API_key = "seriously this is private"
+API_key = ""
 
 cache = {}
 
