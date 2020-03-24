@@ -20,7 +20,7 @@ default_creation_params = {
 }
 
 
-def create_check(check_name: str, creation_params: dict):
+def create_check(check_name: str, creation_params: dict = {}):
     if "name" not in creation_params:
         creation_params["name"] = check_name
     for param in default_creation_params:
@@ -63,7 +63,7 @@ def create_check(check_name: str, creation_params: dict):
     return endpoint
 
 
-def get_endpoint(check_name: str, creation_params: dict):
+def get_endpoint(check_name: str, creation_params: dict = {}):
     """
     Side effect: creates endpoint if it does not exist
     """
