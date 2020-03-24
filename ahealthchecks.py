@@ -103,14 +103,15 @@ def get_endpoint(check_name: str, creation_params: dict):
     return endpoint
 
 
-# def start():
-#     endpoint = get_endpoint()
-#     try:
-#         requests.get(endpoint + "/start", timeout=5)
-#     except requests.exceptions.RequestException:
-#         # If the network request fails for any reason, we don't want
-#         # it to prevent the main job from running
-#         pass
+def start(check_name: str, creation_params: dict):
+    endpoint = get_endpoint(check_name, creation_params)
+    try:
+        requests.get(endpoint + "/start", timeout=5)
+    except requests.exceptions.RequestException:
+        # If the network request fails for any reason, we don't want
+        # it to prevent the main job from running
+        pass
+
 
 """
 ### management command
