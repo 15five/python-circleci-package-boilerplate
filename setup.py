@@ -7,7 +7,7 @@
 import os
 import sys
 
-from setuptools import setup
+from setuptools import setup,find_packages
 from setuptools.command.install import install
 
 # circleci.py version
@@ -56,7 +56,7 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     keywords='healthchecks healthchecks.io registration creation',
-    packages=['circleci'],
+    packages=find_packages(),
     install_requires=[
         'requests==2.20.1',
     ],
