@@ -47,7 +47,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 dev:
-	pip install -r dev-requirements.txt
+	pip install -r dev-requirements.pip
 	pip install -e .
 
 lint: ## check style with flake8
