@@ -64,44 +64,41 @@ def create_check(check_name: str, creation_params: dict):
     return endpoint
 
 
-# args: check_name, creation_params
-check_name = "foo"
-creation_params = {}
-# start of func
-check_name = check_name.lower()
-# try to get endpoint from cache
-endpoint = cache.get(check_name)
-# if not in cache
-if not endpoint:
-    # get healthchecks in current project
-    checks: List[dict] = requests.get(
-        API_URL_BASE + "/checks/", headers={"X-Api-key": API_key}
-    ).json()["checks"]
-    # convert list of checks to dict indexed by name like cache
-    checks_by_name = {}
-    for check in checks:
-        existing_check_name = check["name"].lower()
-        if existing_check_name in checks_by_name:
-            # todo: only raise error if duplicate check_name
-            # we don't want everything to fail if there is a single duplicate
-            raise ValueError(
-                f"Ahealthcheck requires all check names to be unique for identifcation purposes. \
-                              {check}\n\nis a duplicate of check with ping_url {checks_by_name[existing_check_name]}"
-            )
-        checks_by_name[existing_check_name] = check["ping_url"]
-    endpoint = checks_by_name.get(check_name)
-    # if not in existing healthchecks:
+def foo(check_name: str, creation_params: dict):
+    check_name = check_name.lower()
+    # try to get endpoint from cache
+    endpoint = cache.get(check_name)
+    # if not in cache
     if not endpoint:
-        print("creating check")
-        endpoint = create_check(check_name, creation_params)
-        # save check_name/endpoint to cache
-        cache[check_name] = endpoint
-    else:
-        print("check already exists")
-        print("updating cache")
-        for check_name in checks_by_name:
-            cache[check_name] = checks_by_name[check_name]
-print("endpoint is " + endpoint)
+        # get healthchecks in current project
+        checks: List[dict] = requests.get(
+            API_URL_BASE + "/checks/", headers={"X-Api-key": API_key}
+        ).json()["checks"]
+        # convert list of checks to dict indexed by name like cache
+        checks_by_name = {}
+        for check in checks:
+            existing_check_name = check["name"].lower()
+            if existing_check_name in checks_by_name:
+                # todo: only raise error if duplicate check_name
+                # we don't want everything to fail if there is a single duplicate
+                raise ValueError(
+                    f"Ahealthcheck requires all check names to be unique for identifcation purposes. \
+                                {check}\n\nis a duplicate of check with ping_url {checks_by_name[existing_check_name]}"
+                )
+            checks_by_name[existing_check_name] = check["ping_url"]
+        endpoint = checks_by_name.get(check_name)
+        # if not in existing healthchecks:
+        if not endpoint:
+            print("creating check")
+            endpoint = create_check(check_name, creation_params)
+            # save check_name/endpoint to cache
+            cache[check_name] = endpoint
+        else:
+            print("check already exists")
+            print("updating cache")
+            for check_name in checks_by_name:
+                cache[check_name] = checks_by_name[check_name]
+    return endpoint
 
 
 # def get_endpoint():
