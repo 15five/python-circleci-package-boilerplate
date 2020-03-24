@@ -4,10 +4,9 @@ from typing import List
 import requests
 
 API_URL_BASE = "https://healthchecks.io/api/v1/"
-API_READONLY_key = "stop looking at my naughty bits"
 API_key = "seriously this is private"
 
-cache = {"foo": "mock url"}
+cache = {}
 
 default_creation_params = {
     "name": None,
