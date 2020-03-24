@@ -10,7 +10,6 @@ import sys
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
-# circleci.py version
 VERSION = "0.1.0"
 
 
