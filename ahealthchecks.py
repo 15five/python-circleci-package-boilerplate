@@ -63,7 +63,10 @@ def create_check(check_name: str, creation_params: dict):
     return endpoint
 
 
-def foo(check_name: str, creation_params: dict):
+def get_endpoint(check_name: str, creation_params: dict):
+    """
+    Side effect: creates endpoint if it does not exist
+    """
     check_name = check_name.lower()
     # try to get endpoint from cache
     endpoint = cache.get(check_name)
@@ -99,9 +102,6 @@ def foo(check_name: str, creation_params: dict):
                 cache[check_name] = checks_by_name[check_name]
     return endpoint
 
-
-# def get_endpoint():
-#     return "foo"
 
 # def start():
 #     endpoint = get_endpoint()
