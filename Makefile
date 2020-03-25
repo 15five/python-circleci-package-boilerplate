@@ -57,7 +57,7 @@ test: ## run tests quickly with the default Python
 	pytest
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source healthchecks_manager -m pytest
+	coverage run -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
