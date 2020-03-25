@@ -5,6 +5,7 @@
 :license: MIT, see LICENSE for more details.
 """
 import os
+import subprocess
 import sys
 
 from setuptools import setup, find_packages
@@ -19,7 +20,7 @@ class VerifyVersionCommand(install):
     description = "verify that the git tag matches our version"
 
     def run(self):
-        tag = os.getenv("CIRCLE_TAG")
+        tag = subprocess.check_output(["git", "describe", "--tags"]).strip().decode()
 
         if tag != VERSION:
             info = "Git tag: {0} does not match the version of this app: {1}".format(
