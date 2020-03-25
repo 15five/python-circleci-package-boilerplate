@@ -10,18 +10,18 @@ workflows:
             branches:
               ignore:
                 - master
-      - name: test-python3.6
-        test-python:
+      - test-python:
+          name: test-python3.6
           version: "3.6"
           requires:
             - build
-      - name: test-python3.7
-        test-python:
+      - test-python:
+          name: test-python3.7
           version: "3.7"
           requires:
             - build
-      - name: test-python3.8
-        test-python:
+      - test-python:
+          name: test-python3.8
           version: "3.8"
           requires:
             - build
@@ -31,18 +31,18 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - name: test-python3.6
-        test-python:
+      - test-python:
+          name: test-python3.6
           version: "3.6"
           requires:
             - build
-      - name: test-python3.7
-        test-python:
+      - test-python:
+          name: test-python3.7
           version: "3.7"
           requires:
             - build
-      - name: test-python3.8
-        test-python:
+      - test-python:
+          name: test-python3.8
           version: "3.8"
           requires:
             - build
