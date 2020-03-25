@@ -115,12 +115,18 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            coverage run -m pytest
+            mkdir test-results
+            coverage run -m pytest --junitxml=test-results/junit.xml
             coverage report -m
             coverage html
             codecov
+      - run:
+          name: Compress Artifacts
+          command: tar -cvf htmlcov.tar htmlcov
+      - store_test_results:
+          path: test-results
       - store_artifacts:
-          path: htmlcov/
+          path: htmlcov.tar
   integration:
     docker:
       - image: circleci/python:3.6
