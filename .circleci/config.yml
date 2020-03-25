@@ -3,9 +3,9 @@ orbs:
   jira: circleci/jira@1.0.5
 
 workflows:
-  build_and_test_pr:
+  lint_and_test_pr:
     jobs:
-      - build:
+      - lint:
           filters:
             branches:
               ignore:
@@ -14,20 +14,20 @@ workflows:
           name: test-python3.6
           version: "3.6"
           requires:
-            - build
+            - lint
       - test-python:
           name: test-python3.7
           version: "3.7"
           requires:
-            - build
+            - lint
       - test-python:
           name: test-python3.8
           version: "3.8"
           requires:
-            - build
-  build_and_deploy:
+            - lint
+  lint_test_deploy:
     jobs:
-      - build:
+      - lint:
           filters:
             branches:
               only:
@@ -36,17 +36,17 @@ workflows:
           name: test-python3.6
           version: "3.6"
           requires:
-            - build
+            - lint
       - test-python:
           name: test-python3.7
           version: "3.7"
           requires:
-            - build
+            - lint
       - test-python:
           name: test-python3.8
           version: "3.8"
           requires:
-            - build
+            - lint
       - deploy:
           requires:
             - test-python3.6
@@ -60,7 +60,7 @@ workflows:
                 environment_type: development
                 job_type: deployment
 jobs:
-  build:
+  lint:
     docker:
       - image: circleci/python:3.6
     steps:
@@ -78,15 +78,10 @@ jobs:
           paths:
             - "venv"
       - run:
-          name: run tests
+          name: lint
           command: |
             . venv/bin/activate
-            coverage run -m pytest
-            coverage report -m
-            coverage html
-            codecov
-      - store_artifacts:
-          path: htmlcov/
+            black --check .
   test-python:
     parameters:
       version:
