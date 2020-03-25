@@ -1,4 +1,7 @@
+# ignore vscode workspace
 *.code-workspace
+# ignore python test results
+test-results/junit.xml
 
 ###############################
 # Standard Python Gitignore
