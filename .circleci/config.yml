@@ -54,8 +54,6 @@ workflows:
           filters:
             tags:
               only: /[0-9]+(\.[0-9]+)*/
-            branches:
-              ignore: /.*/
           post-steps:
             - jira/notify:
                 environment_type: development
