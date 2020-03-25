@@ -81,7 +81,9 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            make test
+            coverage run -m pytest
+            coverage report -m
+            coverage html
             codecov
       - store_artifacts:
           path: htmlcov/
@@ -110,7 +112,9 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            make test
+            coverage run -m pytest
+            coverage report -m
+            coverage html
             codecov
       - store_artifacts:
           path: htmlcov/
