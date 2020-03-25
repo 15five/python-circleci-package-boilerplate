@@ -4,32 +4,10 @@
 :copyright: (c) 2017 by Lev Lazinskiy
 :license: MIT, see LICENSE for more details.
 """
-import subprocess
-import sys
 
 from setuptools import setup, find_packages
-from setuptools.command.install import install
 
 VERSION = "0.1.1"
-
-
-class VerifyVersionCommand(install):
-    """Custom command to verify that the git tag matches our version"""
-
-    description = "verify that the git tag matches our version"
-
-    def run(self):
-        tag = (
-            subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"])
-            .strip()
-            .decode()
-        )
-
-        if tag != VERSION:
-            info = "Git tag: {0} does not match the version of this app: {1}".format(
-                tag, VERSION
-            )
-            sys.exit(info)
 
 
 setup(
@@ -59,5 +37,4 @@ setup(
     packages=find_packages(),
     install_requires=["requests==2.20.1",],
     python_requires=">=3",
-    cmdclass={"verify": VerifyVersionCommand,},
 )
