@@ -47,14 +47,22 @@ workflows:
           version: "3.8"
           requires:
             - lint
+      # Don't want to deploy every push to master?
+      # You can switch to manual approval if desired
+      # Uncomment below and get rid of requirement for test-python
+      # - hold-deploy:
+      #     type: approval
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
       - deploy:
+          # requires:
+          #   - hold-deploy
           requires:
             - test-python3.6
             - test-python3.7
             - test-python3.8
-          filters:
-            tags:
-              only: /[0-9]+(\.[0-9]+)*/
           post-steps:
             - jira/notify:
                 environment_type: development
