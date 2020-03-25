@@ -29,8 +29,9 @@ workflows:
     jobs:
       - build:
           filters:
-            tags:
-              only: /.*/
+            branches:
+              only:
+                - master
       - test-python:
           name: test-python3.6
           version: "3.6"
