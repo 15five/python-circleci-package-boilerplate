@@ -4,7 +4,6 @@
 :copyright: (c) 2017 by Lev Lazinskiy
 :license: MIT, see LICENSE for more details.
 """
-import os
 import subprocess
 import sys
 
