@@ -119,7 +119,6 @@ jobs:
             coverage run --source=. --omit=venv/* -m pytest --junitxml=test-results/junit.xml
             coverage report -m
             coverage html
-            codecov
       - run:
           name: Compress Artifacts
           command: tar -cvf htmlcov.tar htmlcov

@@ -11,6 +11,5 @@ coverage==5.0.4
 pytest==5.1.1
 responses==0.10.6
 
-# Release Utilities
-codecov==2.0.22 
+# Release Utilities 
 twine==3.1.1
