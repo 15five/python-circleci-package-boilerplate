@@ -116,7 +116,7 @@ jobs:
           command: |
             . venv/bin/activate
             mkdir test-results
-            coverage run --source=healthchecks --omit=venv/* -m pytest --junitxml=test-results/junit.xml
+            coverage run --source=. --omit=venv/* -m pytest --junitxml=test-results/junit.xml
             coverage report -m
             coverage html
             codecov
