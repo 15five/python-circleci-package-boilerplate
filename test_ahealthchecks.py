@@ -12,6 +12,11 @@ def test_get_endpoint():
     ahealthchecks.cache = {}
 
 
+def test_error_if_no_api_key():
+    with pytest.raises(HTTPError):
+        ahealthchecks.get_endpoint("barnacle", {})
+
+
 @responses.activate
 def test_get_endpoint_if_not_cached_but_exists_in_website():
     responses.add(
