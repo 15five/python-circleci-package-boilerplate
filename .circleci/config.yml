@@ -74,7 +74,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
       - run:
           name: install python dependencies
           command: |
@@ -82,7 +82,7 @@ jobs:
             . venv/bin/activate
             make dev
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
           paths:
             - "venv"
       - run:
@@ -100,7 +100,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
       - run:
           name: install python dependencies
           command: |
@@ -108,7 +108,7 @@ jobs:
             . venv/bin/activate
             make dev
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
           paths:
             - "venv"
       - run:
@@ -139,7 +139,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
       - run:
           name: install python dependencies
           command: |
@@ -147,7 +147,7 @@ jobs:
             . venv/bin/activate
             make dev
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "setup.py" }}-{{ checksum "Makefile" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
           paths:
             - "venv"
       - run:
