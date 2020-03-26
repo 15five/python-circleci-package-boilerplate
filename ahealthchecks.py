@@ -1,10 +1,8 @@
-import json
 from typing import List
 
-import requests
+import healthchecks_api_wrapper
 
-API_URL_BASE = "https://healthchecks.io/api/v1/"
-API_key = ""
+import requests
 
 cache = {}
 
@@ -26,40 +24,29 @@ def create_check(check_name: str, creation_params: dict = {}):
     for param in default_creation_params:
         if param not in creation_params and default_creation_params[param] is not None:
             creation_params[param] = default_creation_params[param]
-    channels_response = requests.get(
-        API_URL_BASE + "/channels/", headers={"X-Api-key": API_key}
-    )
-    channels: List[dict] = channels_response.json()["channels"]
-    # convert list of channels to dict indexed by name
-    # ideally user would just pass in channel id isntead of name
-    # in which case this would not be needed
-    # however there is no way in the GUI to see the channel ID
-    # so the user will be using name instead
-    channels_by_name = {}
-    for channel in channels:
-        channel_name = channel["name"].lower()
-        if channel_name in channels_by_name:
-            raise ValueError(
-                f"Ahealthchannel requires all channel names to be unique for identifcation purposes. \
-                            {channel}\n\nis a duplicate of channel with id {channels_by_name[channel_name]}"
-            )
-        channels_by_name[channel_name] = channel["id"]
-    channel_ids = []
-    for channel_name in creation_params["channels"]:
-        channel_name = channel_name.lower()
-        if channel_name == "*":
-            # * means assign all chanels
-            # so no needs to specify individual id's
-            break
-        channel_ids.append(channels_by_name[channel_name])
-    creation_params["channels"] = ",".join(channel_ids)
-    creation_response = requests.post(
-        API_URL_BASE + "/checks/",
-        headers={"X-Api-key": API_key},
-        data=json.dumps(creation_params),
-    )
-    check = creation_response.json()
-    endpoint = check["ping_url"][check["ping_url"].rfind("/") + 1 :]
+    if "*" not in creation_params["channels"]:
+        channels = healthchecks_api_wrapper.get_channels()
+        # convert list of channels to dict indexed by name
+        # ideally user would just pass in channel id isntead of name
+        # in which case this would not be needed
+        # however there is no way in the GUI to see the channel ID
+        # so the user will be using name instead
+        channels_by_name = {}
+        for channel in channels:
+            channel_name = channel["name"].lower()
+            if channel_name in channels_by_name:
+                raise ValueError(
+                    f"Ahealthchannel requires all channel names to be unique for identifcation purposes. \
+                                {channel}\n\nis a duplicate of channel with id {channels_by_name[channel_name]}"
+                )
+            channels_by_name[channel_name] = channel["id"]
+        channel_ids = []
+        for channel_name in creation_params["channels"]:
+            channel_name = channel_name.lower()
+            channel_ids.append(channels_by_name[channel_name])
+        creation_params["channels"] = ",".join(channel_ids)
+    check = healthchecks_api_wrapper.create_check(check_name, creation_params)
+    endpoint = healthchecks_api_wrapper.get_id_from_endpoint(check["ping_url"])
     return endpoint
 
 
@@ -73,9 +60,7 @@ def get_endpoint(check_name: str, creation_params: dict = {}):
     # if not in cache
     if not endpoint:
         # get healthchecks in current project
-        checks: List[dict] = requests.get(
-            API_URL_BASE + "/checks/", headers={"X-Api-key": API_key}
-        ).json()["checks"]
+        checks: List[dict] = healthchecks_api_wrapper.get_checks()
         # convert list of checks to dict indexed by name like cache
         checks_by_name = {}
         for check in checks:
