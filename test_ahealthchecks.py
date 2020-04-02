@@ -49,7 +49,6 @@ def test_get_endpoint_if_does_not_exist():
 
 @responses.activate
 def test_create_check():
-    responses.add(responses.GET, API_URL_BASE + "/channels/", json={"channels": []})
     responses.add(
         responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
     )
@@ -58,17 +57,26 @@ def test_create_check():
 
 
 @responses.activate
-def test_create_check_with_creation_options():
+def test_create_check_with_channel():
     responses.add(
         responses.GET,
         API_URL_BASE + "/channels/",
-        json={"channels": [{"name": "slack", "id": "1"}]},
+        json={"channels": [{"name": "slack", "id": "112536"}]},
     )
     responses.add(
         responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
     )
-    endpoint = ahealthchecks.create_check(
-        "fah", {"channels": ["slack"], "tags": "fooTag"}
-    )
+    endpoint = ahealthchecks.create_check("fah", {"channels": ["slack"]})
     assert "foo" == endpoint
-    assert "fooTag" in responses.calls[1].request.body
+    assert "112536" in responses.calls[1].request.body
+
+
+@responses.activate
+def test_default_creation_params_can_be_overridden():
+    ahealthchecks.default_creation_params["timeout"] = 5326
+    responses.add(
+        responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
+    )
+    ahealthchecks.create_check("fah", {"timeout": 142})
+    assert "5326" not in responses.calls[0].request.body
+    assert "142" in responses.calls[0].request.body
