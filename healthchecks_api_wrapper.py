@@ -8,7 +8,7 @@ API_key = ""
 
 def get_id_from_endpoint(endpoint: str):
     """
-    given a endpoint like https://hc-ping.com/2453273d-864d-4671-9ef9-a024b1a6fa83 
+    given a endpoint like https://hc-ping.com/2453273d-864d-4671-9ef9-a024b1a6fa83
     returns 2453273d-864d-4671-9ef9-a024b1a6fa83
     """
     return endpoint[endpoint.rfind("/") + 1 :]
