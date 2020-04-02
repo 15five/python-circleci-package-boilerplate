@@ -70,4 +70,5 @@ def test_create_check_with_creation_options():
     endpoint = ahealthchecks.create_check(
         "fah", {"channels": ["slack"], "tags": "fooTag"}
     )
-    assert endpoint == "foo"
+    assert "foo" == endpoint
+    assert "fooTag" in responses.calls[1].request.body
