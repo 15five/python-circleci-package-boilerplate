@@ -19,6 +19,9 @@ default_creation_params = {
 
 
 def create_check(check_name: str, creation_params: dict = {}):
+    """
+    Creates a healthcheck.
+    """
     if "name" not in creation_params:
         creation_params["name"] = check_name
     for param in default_creation_params:
@@ -89,16 +92,25 @@ def get_endpoint(check_name: str, creation_params: dict = {}):
 
 
 def start(check_name: str, creation_params: dict):
+    """
+    Signal to healthchecks.io to start timing the check_name in question
+    """
     endpoint = get_endpoint(check_name, creation_params)
     requests.get(endpoint + "/start", timeout=5)
 
 
 def done(check_name: str, creation_params: dict):
+    """
+    Let healthchecks.io know that the relevant job associated with check_name is completed
+    """
     endpoint = get_endpoint(check_name, creation_params)
     requests.get(endpoint, timeout=5)
 
 
 def fail(check_name: str, creation_params: dict):
+    """
+    Let healthchecks.io know that the relevant job associated with check_name has failed
+    """
     endpoint = get_endpoint(check_name, creation_params)
     requests.get(endpoint + "/fail", timeout=5)
 
