@@ -50,8 +50,8 @@ dev:
 	pip install -r dev-requirements.pip
 	pip install -e .
 
-lint: ## check style with flake8
-	flake8 healthchecks_manager tests
+lint:
+	black --check .
 
 test: ## run tests quickly with the default Python
 	pytest
