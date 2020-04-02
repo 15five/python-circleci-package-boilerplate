@@ -5,10 +5,33 @@ import responses
 from requests.exceptions import HTTPError
 
 
+class MockRedisCache(dict):
+    mock_cache = {"foo1": "mock url1"}
+
+    def __getitem__(self, key):
+        return self.mock_cache[key]
+
+    def get(self, key, default=None):
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            return default
+
+    def __setitem__(self, key, value):
+        self.mock_cache[key] = value
+
+
 def test_get_endpoint():
     ahealthchecks.cache = {"foo": "mock url"}
     endpoint = ahealthchecks.get_endpoint("foo", {})
     assert endpoint == "mock url"
+    ahealthchecks.cache = {}
+
+
+def test_get_endpoint_with_cache_override():
+    ahealthchecks.cache = MockRedisCache()
+    endpoint = ahealthchecks.get_endpoint("foo1", {})
+    assert endpoint == "mock url1"
     ahealthchecks.cache = {}
 
 
@@ -45,6 +68,22 @@ def test_get_endpoint_if_does_not_exist():
     )
     endpoint = ahealthchecks.get_endpoint("squidward", {})
     assert endpoint == "44444444"
+
+
+@responses.activate
+def test_get_endpoint_if_does_not_exist_with_cache_override():
+    ahealthchecks.cache = MockRedisCache()
+    responses.add(
+        responses.GET, API_URL_BASE + "/checks/", json={"checks": []},
+    )
+    responses.add(
+        responses.POST,
+        API_URL_BASE + "/checks/",
+        json={"ping_url": "https://hc-ping.com/44444444"},
+    )
+    endpoint = ahealthchecks.get_endpoint("foo2", {})
+    assert endpoint == "44444444"
+    assert ahealthchecks.cache["foo2"] == "44444444"
 
 
 @responses.activate
