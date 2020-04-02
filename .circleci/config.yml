@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  jira: circleci/jira@1.1.4
 
 workflows:
   lint_and_test_pr:
