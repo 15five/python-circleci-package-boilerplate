@@ -75,11 +75,13 @@ jobs:
       - checkout
       - restore_cache:
           key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
+      # see https://github.com/pypa/pip/issues/4537 for why we need to install_egg_info
       - run:
           name: install python dependencies
           command: |
             python3 -m venv venv
             . venv/bin/activate
+            python setup.py install_egg_info
             make dev
       - save_cache:
           key: v2-dependency-cache-{{ checksum "requirements.txt" }}-{{ checksum "dev-requirements.pip" }}
