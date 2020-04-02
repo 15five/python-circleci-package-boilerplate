@@ -91,7 +91,7 @@ jobs:
           name: lint
           command: |
             . venv/bin/activate
-            black --check .
+            make lint
   test-python:
     parameters:
       version:
