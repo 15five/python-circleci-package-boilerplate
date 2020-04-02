@@ -1,6 +1,6 @@
 from typing import List
 
-import healthchecks_api_wrapper
+from . import healthchecks_api_wrapper
 
 import requests
 
