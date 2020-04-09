@@ -4,7 +4,7 @@ boilerplate repo you can use as a base for your python package.
 ## Features:
 * Package directory structure already laid out
 * **FULL** CI/CD through circleci with the works (black linting, pip caching, tests against multiple python versions, test summary, coverage results, automatic package deploy each push to master)
-* makefile and other sensible files and configuration already present
+* Makefile and other sensible files and configuration already present
 
 ## To Use:
 1. Copy Repo
