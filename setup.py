@@ -9,7 +9,7 @@ VERSION = "0.0.1"
 setup(
     name="python-package-boilerplate",
     version=VERSION,
-    description="Library for automatic registration and pinging of https://healthchecks.io/ healthchecks.",
+    description="Your description here",
     long_description="see repo for readme",
     url="https://github.com/15five/python-package-boilerplate",
     author="Your name here",
