@@ -9,5 +9,6 @@ boilerplate repo you can use as a base for your python package.
 ## To Use:
 1. Copy Repo
 2. Replace all instances of "python-package-boilerplate" with your package name
-3. Replace code & tests
-4. Ask devops to register project w/ circleci
+3. Replace "healthchecks-manager" folder name with package name. Do search/replace as well.
+4. Replace code & tests
+5. Ask devops to register project w/ circleci
