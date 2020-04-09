@@ -15,7 +15,7 @@ setup(
     version=VERSION,
     description="Library for automatic registration and pinging of https://healthchecks.io/ healthchecks.",
     long_description="see repo for readme",
-    url="https://github.com/15five/healthchecks-manager",
+    url="https://github.com/15five/python-package-boilerplate",
     author="Caleb Sparks",
     author_email="caleb@15five.com",
     license="MIT",
