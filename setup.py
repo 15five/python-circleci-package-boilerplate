@@ -1,23 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-:copyright: (c) 2017 by Lev Lazinskiy
-:license: MIT, see LICENSE for more details.
-"""
 
 from setuptools import setup, find_packages
 
-VERSION = "0.1.4"
+VERSION = "0.0.1"
 
 
 setup(
-    name="healthchecks_manager",
+    name="python-package-boilerplate",
     version=VERSION,
     description="Library for automatic registration and pinging of https://healthchecks.io/ healthchecks.",
     long_description="see repo for readme",
     url="https://github.com/15five/python-package-boilerplate",
-    author="Caleb Sparks",
-    author_email="caleb@15five.com",
+    author="Your name here",
+    author_email="Your email here",
     license="MIT",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
@@ -33,7 +29,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    keywords="healthchecks healthchecks.io registration creation",
+    keywords="insert your keywords here",
     packages=find_packages(),
     install_requires=["requests==2.20.1",],
     python_requires=">=3",
