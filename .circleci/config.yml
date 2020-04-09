@@ -61,10 +61,6 @@ workflows:
             - test-python3.6
             - test-python3.7
             - test-python3.8
-          post-steps:
-            - jira/notify:
-                environment_type: development
-                job_type: deployment
 jobs:
   lint:
     docker:
