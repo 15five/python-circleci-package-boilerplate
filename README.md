@@ -12,4 +12,6 @@ boilerplate repo you can use as a base for your python package.
 3. Replace "healthchecks_manager" folder name with package name. Do search/replace as well.
 4. Go over setup.py and configure it to your liking
 4. Replace code & tests
-5. Ask devops to register project w/ circleci and set CIRCLE_TOKEN and PYPI_PASSWORD env vars and configure status badge
+5. register project w/ circleci
+6. set CIRCLE_TOKEN and PYPI_PASSWORD env vars
+7. replace "caleb15" in `.circleci/config.yml` with your pypi username for package publishing
