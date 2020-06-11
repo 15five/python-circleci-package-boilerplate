@@ -39,7 +39,7 @@ def create_check(check_name: str, creation_params: dict = {}):
             channel_name = channel["name"].lower()
             if channel_name in channels_by_name:
                 raise ValueError(
-                    f"python-package-boilerplate requires all channel names to be unique for identifcation purposes. \
+                    f"python-circleci-package-boilerplate requires all channel names to be unique for identifcation purposes. \
                                 {channel}\n\nis a duplicate of channel with id {channels_by_name[channel_name]}"
                 )
             channels_by_name[channel_name] = channel["id"]
@@ -72,7 +72,7 @@ def get_endpoint(check_name: str, creation_params: dict = {}):
                 # todo: only raise error if duplicate check_name
                 # we don't want everything to fail if there is a single duplicate
                 raise ValueError(
-                    f"python-package-boilerplate requires all check names to be unique for identifcation purposes. \
+                    f"python-circleci-package-boilerplate requires all check names to be unique for identifcation purposes. \
                                 {check}\n\nis a duplicate of check with ping_url {checks_by_name[existing_check_name]}"
                 )
             checks_by_name[existing_check_name] = check["ping_url"]

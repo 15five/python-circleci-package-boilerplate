@@ -6,11 +6,11 @@ VERSION = "0.0.1"
 
 
 setup(
-    name="python-package-boilerplate",
+    name="python-circleci-package-boilerplate",
     version=VERSION,
     description="Your description here",
     long_description="see repo for readme",
-    url="https://github.com/15five/python-package-boilerplate",
+    url="https://github.com/15five/python-circleci-package-boilerplate",
     author="Your name here",
     author_email="Your email here",
     license="MIT",
