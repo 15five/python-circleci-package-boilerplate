@@ -1,4 +1,4 @@
-# python-package-boilerplate [![CircleCI](https://circleci.com/gh/15five/python-package-boilerplate.svg?style=svg&circle-token=f6c8494ec308088a8a65fe79e366763b02b38d9b)](https://circleci.com/gh/15five/python-package-boilerplate) [![PyPI version](https://badge.fury.io/py/python-package-boilerplate.svg)](https://badge.fury.io/py/python-package-boilerplate)
+# python-package-boilerplate [![CircleCI](https://circleci.com/gh/15five/python-circleci-package-boilerplate.svg?style=svg&circle-token=f6c8494ec308088a8a65fe79e366763b02b38d9b)](https://circleci.com/gh/15five/python-package-boilerplate) [![PyPI version](https://badge.fury.io/py/python-package-boilerplate.svg)](https://badge.fury.io/py/python-package-boilerplate)
 boilerplate repo you can use as a base for your python package.
 
 ## Features:
