@@ -23,6 +23,13 @@ workflows:
           version: "3.8"
           requires:
             - lint
+      - deploy:
+          # requires:
+          #   - hold-deploy
+          requires:
+            - test-python3.6
+            - test-python3.7
+            - test-python3.8
   lint_test_deploy:
     jobs:
       - lint:
