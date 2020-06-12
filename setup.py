@@ -8,11 +8,11 @@ VERSION = "0.0.1"
 setup(
     name="python-circleci-package-boilerplate",
     version=VERSION,
-    description="Your description here",
+    description="test",
     long_description="see repo for readme",
     url="https://github.com/15five/python-circleci-package-boilerplate",
-    author="Your name here",
-    author_email="Your email here",
+    author="test",
+    author_email="caleb@15five.com",
     license="MIT",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
@@ -28,7 +28,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    keywords="insert your keywords here",
+    keywords="foo",
     packages=find_packages(),
     install_requires=["requests==2.22.0",],
     python_requires=">=3.6",
