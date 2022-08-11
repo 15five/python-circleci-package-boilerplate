@@ -23,6 +23,11 @@ workflows:
           version: "3.9"
           requires:
             - lint
+      - test-python:
+          name: test-python3.10
+          version: "3.10"
+          requires:
+            - lint
   lint_test_deploy:
     jobs:
       - lint:
@@ -45,6 +50,11 @@ workflows:
           version: "3.9"
           requires:
             - lint
+      - test-python:
+          name: test-python3.10
+          version: "3.10"
+          requires:
+            - lint
       # Don't want to deploy every push to master?
       # You can switch to manual approval if desired
       # Uncomment below and get rid of requirement for test-python
@@ -61,6 +71,7 @@ workflows:
             - test-python3.7
             - test-python3.8
             - test-python3.9
+            - test-python3.10
 jobs:
   lint:
     docker:
