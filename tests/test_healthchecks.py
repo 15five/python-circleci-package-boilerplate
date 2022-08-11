@@ -47,7 +47,10 @@ def test_get_endpoint_if_not_cached_but_exists_in_website():
         API_URL_BASE + "/checks/",
         json={
             "checks": [
-                {"name": "spongebob", "ping_url": "https://hc-ping.com/55555555",}
+                {
+                    "name": "spongebob",
+                    "ping_url": "https://hc-ping.com/55555555",
+                }
             ]
         },
     )
@@ -58,7 +61,9 @@ def test_get_endpoint_if_not_cached_but_exists_in_website():
 @responses.activate
 def test_get_endpoint_if_does_not_exist():
     responses.add(
-        responses.GET, API_URL_BASE + "/checks/", json={"checks": []},
+        responses.GET,
+        API_URL_BASE + "/checks/",
+        json={"checks": []},
     )
     responses.add(responses.GET, API_URL_BASE + "/channels/", json={"channels": []})
     responses.add(
@@ -74,7 +79,9 @@ def test_get_endpoint_if_does_not_exist():
 def test_get_endpoint_if_does_not_exist_with_cache_override():
     manager.cache = MockRedisCache()
     responses.add(
-        responses.GET, API_URL_BASE + "/checks/", json={"checks": []},
+        responses.GET,
+        API_URL_BASE + "/checks/",
+        json={"checks": []},
     )
     responses.add(
         responses.POST,
@@ -89,7 +96,9 @@ def test_get_endpoint_if_does_not_exist_with_cache_override():
 @responses.activate
 def test_create_check():
     responses.add(
-        responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
+        responses.POST,
+        API_URL_BASE + "/checks/",
+        json={"ping_url": "foo"},
     )
     endpoint = manager.create_check("")
     assert endpoint == "foo"
@@ -103,7 +112,9 @@ def test_create_check_with_channel():
         json={"channels": [{"name": "slack", "id": "112536"}]},
     )
     responses.add(
-        responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
+        responses.POST,
+        API_URL_BASE + "/checks/",
+        json={"ping_url": "foo"},
     )
     endpoint = manager.create_check("fah", {"channels": ["slack"]})
     assert "foo" == endpoint
@@ -114,7 +125,9 @@ def test_create_check_with_channel():
 def test_default_creation_params_can_be_overridden():
     manager.default_creation_params["timeout"] = 5326
     responses.add(
-        responses.POST, API_URL_BASE + "/checks/", json={"ping_url": "foo"},
+        responses.POST,
+        API_URL_BASE + "/checks/",
+        json={"ping_url": "foo"},
     )
     manager.create_check("fah", {"timeout": 142})
     assert "5326" not in responses.calls[0].request.body
